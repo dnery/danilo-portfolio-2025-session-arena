@@ -1,0 +1,6 @@
+body { font-family: system-ui, sans-serif; margin: 0; display: grid; place-items: center; min-height: 100vh; background: radial-gradient(1200px 600px at 50% 0%, #0d1b2a, #000); color: #e0fbfc; }
+main { width: min(720px, 92vw); text-align: center; }
+.toggle { display: inline-flex; gap: .6rem; align-items: center; margin: 1rem 0 2rem; font-weight: 600; }
+.stage { display: grid; place-items: center; height: 320px; }
+.orb { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #00f5d4, #0066ff); box-shadow: 0 0 8px rgba(0,0,0,.3); }
+
