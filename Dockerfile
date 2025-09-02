@@ -2,6 +2,9 @@ ARG UV_VER=0.8
 ARG PY_VER=3.13
 FROM ghcr.io/astral-sh/uv:$UV_VER-python$PY_VER-trixie-slim AS base
 
+# install healthcheck utils
+RUN apt update && apt install -y --no-install-recommends curl ca-certificates
+
 # switch to unprivileged user
 RUN useradd -m runner
 USER runner

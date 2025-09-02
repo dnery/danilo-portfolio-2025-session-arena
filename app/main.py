@@ -34,7 +34,7 @@ def create_app() -> FastAPI:
     # health check
     @app.get("/healthz")
     async def healthz():
-        return {"ok": True, "env": settings.env}
+        return {"status": "ok"}
 
     # toggle feature flag
     @app.post("/api/flags/{flag_name}/toggle")

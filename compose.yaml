@@ -1,6 +1,10 @@
 name: arena
-services: 
 
+networks:
+  ace:
+    name: ace
+
+services: 
   app:
     image: ghcr.io/dnery/session-arena:master
     #build: .
@@ -13,14 +17,15 @@ services:
         condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8000/healthz || exit 1"]
-      start_period: 4s
-      interval: 6s
-      timeout: 5s
+      start_period: 2s
+      interval: 4s
+      timeout: 3s
       retries: 3
     # bind on loopback only; Caddy proxies 443 -> 127.0.0.1:8000
     ports:
       - "127.0.0.1:8000:8000"
     restart: unless-stopped
+    networks: [ace]
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
@@ -35,6 +40,7 @@ services:
   #    redis:
   #      condition: service_healthy
   #  restart: unless-stopped
+  #  networks: [ace]
   #  labels:
   #    - "com.centurylinklabs.watchtower.enable=true"
 
@@ -55,6 +61,7 @@ services:
       timeout: 5s
       retries: 3
     restart: unless-stopped
+    networks: [ace]
     shm_size: 128mb
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -69,6 +76,7 @@ services:
       timeout: 5s
       retries: 3
     restart: unless-stopped
+    networks: [ace]
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
