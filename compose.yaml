@@ -2,9 +2,8 @@ name: arena
 services: 
 
   app:
-    # FIXME use image with GH actions (built by GHCR)
-    # image: ghcr.io/dnery/session-arena:master
-    build: .
+    image: ghcr.io/dnery/session-arena:master
+    #build: .
     env_file:
       - .env
     depends_on:
@@ -21,25 +20,23 @@ services:
     # bind on loopback only; Caddy proxies 443 -> 127.0.0.1:8000
     ports:
       - "127.0.0.1:8000:8000"
-      # FIXME remove this
-      - "8000:8000"
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
-  worker:
-    # FIXME use image with GH actions (built by GHCR)
-    # image: ghcr.io/dnery/session-arena:master
-    build: .
-    command: uv run celery -A app.celery_app worker --log_level=INFO
-    env_file:
-      - .env
-    depends_on:
-      redis:
-        condition: service_healthy
-    restart: unless-stopped
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
+  #worker:
+  #  # FIXME use image with GH actions (built by GHCR)
+  #  # image: ghcr.io/dnery/session-arena:master
+  #  build: .
+  #  command: uv run celery -A app.celery_app worker --log_level=INFO
+  #  env_file:
+  #    - .env
+  #  depends_on:
+  #    redis:
+  #      condition: service_healthy
+  #  restart: unless-stopped
+  #  labels:
+  #    - "com.centurylinklabs.watchtower.enable=true"
 
   db:
     image: postgres:16-trixie
